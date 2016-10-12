@@ -10,6 +10,8 @@ namespace Nager.Zalando.Model
     {
         public AgeGroup? AgeGroup;
         public Color? Color;
+        public Gender? Gender;
+        public string FullText;
 
         public string GetFilter()
         {
@@ -31,6 +33,20 @@ namespace Nager.Zalando.Model
                 {
                     sb.Append($"&color={color.Trim()}");
                 }
+            }
+
+            if (this.Gender != null)
+            {
+                var genders = this.Gender.ToString().Split(',');
+                foreach (var gender in genders)
+                {
+                    sb.Append($"&gender={gender.Trim()}");
+                }
+            }
+
+            if (!string.IsNullOrEmpty(this.FullText))
+            {
+                sb.Append($"&fulltext={this.FullText}");
             }
 
             sb.Remove(0, 1);
@@ -62,5 +78,15 @@ namespace Nager.Zalando.Model
         White,
         Blue,
         Petrol,
+        Purple,
+        Pink,
+        Gold,
+    }
+
+    [Flags]
+    public enum Gender
+    {
+        Male,
+        Female,
     }
 }

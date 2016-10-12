@@ -19,19 +19,39 @@ namespace Nager.Zalando.Monitor
 
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             this.Text = $"Nager - Zalando {version}";
+
+
+            this.comboBoxColor.DataSource = Enum.GetValues(typeof(Color));
+            this.comboBoxAgeGroup.DataSource = Enum.GetValues(typeof(AgeGroup));
+            this.comboBoxGender.DataSource = Enum.GetValues(typeof(Gender));
         }
 
         private async void buttonGetArticle_Click(object sender, EventArgs e)
         {
-            var zalandoWrapper = new ZalandoWrapper();
+            this.dataGridView1.DataSource = null;
+            this.buttonGetArticle.Enabled = false;
 
-            var filter = new ArticleFilter();
-            filter.AgeGroup = AgeGroup.Kids | AgeGroup.Babies;
-            filter.Color = Color.Brown;
+            try
+            {
+                var zalandoWrapper = new ZalandoWrapper();
 
-            var task = await zalandoWrapper.GetArticles(filter);
+                var filter = new ArticleFilter();
+                //filter.AgeGroup = AgeGroup.Kids | AgeGroup.Babies;
+                filter.AgeGroup = (AgeGroup)this.comboBoxAgeGroup.SelectedItem;
+                filter.Color = (Color)this.comboBoxColor.SelectedItem;
+                filter.FullText = this.textBoxFullText.Text;
+                filter.Gender = (Gender)this.comboBoxGender.SelectedItem;
 
-            this.dataGridView1.DataSource = task.Content;
+                var task = await zalandoWrapper.GetArticles(filter);
+
+                this.dataGridView1.DataSource = task.Content;
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+            this.buttonGetArticle.Enabled = true;
         }
 
         private void dataGridView1_SelectionChanged(object sender, EventArgs e)
@@ -55,6 +75,8 @@ namespace Nager.Zalando.Monitor
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
+            this.pictureBox1.Image = null;
+
             if (this.dataGridView2.CurrentRow == null)
             {
                 return;
