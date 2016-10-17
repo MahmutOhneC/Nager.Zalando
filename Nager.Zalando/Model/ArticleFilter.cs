@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Nager.Zalando.Model
 {
@@ -58,7 +55,6 @@ namespace Nager.Zalando.Model
     }
 
 
-
     [Flags]
     public enum AgeGroup
     {
@@ -78,9 +74,17 @@ namespace Nager.Zalando.Model
         White,
         Blue,
         Petrol,
-        Purple,
+        Turquoise,
+        Green,
+        Olive,
+        Yellow,
+        Orange,
+        Red,
         Pink,
+        Purple,
         Gold,
+        Silver,
+        Multicolored,
     }
 
     [Flags]

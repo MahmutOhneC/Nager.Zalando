@@ -1,12 +1,6 @@
 ﻿using Nager.Zalando.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Nager.Zalando.Monitor
@@ -20,10 +14,15 @@ namespace Nager.Zalando.Monitor
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             this.Text = $"Nager - Zalando {version}";
 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridViewImages.AutoGenerateColumns = false;
 
             this.comboBoxColor.DataSource = Enum.GetValues(typeof(Color));
             this.comboBoxAgeGroup.DataSource = Enum.GetValues(typeof(AgeGroup));
             this.comboBoxGender.DataSource = Enum.GetValues(typeof(Gender));
+
+            this.pictureBoxProduct.InitialImage = ImageHelper.GetImage("loading...");
+            this.pictureBoxLogo.InitialImage = ImageHelper.GetImage("loading...");
         }
 
         private async void buttonGetArticle_Click(object sender, EventArgs e)
@@ -67,29 +66,44 @@ namespace Nager.Zalando.Monitor
             }
 
             var article = this.dataGridView1.CurrentRow.DataBoundItem as Article;
-            this.propertyGrid1.SelectedObject = article.Brand;
-            this.dataGridView2.DataSource = article.Media.Images;
+            if (article == null)
+            {
+                return;
+            }
 
-            
+            this.textBoxId.Text = article.Id;
+            this.textBoxModelId.Text = article.ModelId;
+            this.textBoxShopUrl.Text = article.ShopUrl;
+
+            if (article.Brand != null)
+            {
+                this.pictureBoxLogo.ImageLocation = article.Brand.LogoUrl;
+            }
+
+            this.dataGridViewImages.DataSource = article.Media.Images;
         }
 
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
-            this.pictureBox1.Image = null;
+            this.pictureBoxProduct.Image = null;
 
-            if (this.dataGridView2.CurrentRow == null)
+            if (this.dataGridViewImages.CurrentRow == null)
             {
                 return;
             }
 
-            if (this.dataGridView2.CurrentRow.DataBoundItem == null)
+            if (this.dataGridViewImages.CurrentRow.DataBoundItem == null)
             {
                 return;
             }
 
-            var image = this.dataGridView2.CurrentRow.DataBoundItem as Image;
+            var image = this.dataGridViewImages.CurrentRow.DataBoundItem as Image;
+            if (image == null)
+            {
+                return;
+            }
 
-            this.pictureBox1.ImageLocation = image.MediumUrl;
+            this.pictureBoxProduct.ImageLocation = image.LargeHdUrl;
         }
     }
 }
