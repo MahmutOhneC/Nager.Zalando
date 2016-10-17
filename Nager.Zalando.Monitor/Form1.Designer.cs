@@ -37,6 +37,8 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewImages = new System.Windows.Forms.DataGridView();
+            this.ColumnOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBoxProduct = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxShopUrl = new System.Windows.Forms.TextBox();
@@ -55,8 +57,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxColor = new System.Windows.Forms.ComboBox();
-            this.ColumnOrderNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -75,9 +75,9 @@
             // 
             // buttonGetArticle
             // 
-            this.buttonGetArticle.Location = new System.Drawing.Point(89, 107);
+            this.buttonGetArticle.Location = new System.Drawing.Point(72, 111);
             this.buttonGetArticle.Name = "buttonGetArticle";
-            this.buttonGetArticle.Size = new System.Drawing.Size(75, 23);
+            this.buttonGetArticle.Size = new System.Drawing.Size(117, 23);
             this.buttonGetArticle.TabIndex = 0;
             this.buttonGetArticle.Text = "Get Article";
             this.buttonGetArticle.UseVisualStyleBackColor = true;
@@ -189,6 +189,20 @@
             this.dataGridViewImages.Size = new System.Drawing.Size(244, 232);
             this.dataGridViewImages.TabIndex = 4;
             this.dataGridViewImages.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
+            // 
+            // ColumnOrderNumber
+            // 
+            this.ColumnOrderNumber.DataPropertyName = "OrderNumber";
+            this.ColumnOrderNumber.HeaderText = "OrderNumber";
+            this.ColumnOrderNumber.Name = "ColumnOrderNumber";
+            this.ColumnOrderNumber.ReadOnly = true;
+            // 
+            // ColumnType
+            // 
+            this.ColumnType.DataPropertyName = "Type";
+            this.ColumnType.HeaderText = "Type";
+            this.ColumnType.Name = "ColumnType";
+            this.ColumnType.ReadOnly = true;
             // 
             // pictureBoxProduct
             // 
@@ -305,7 +319,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(41, 86);
+            this.label4.Location = new System.Drawing.Point(24, 37);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(45, 13);
@@ -315,7 +329,7 @@
             // comboBoxGender
             // 
             this.comboBoxGender.FormattingEnabled = true;
-            this.comboBoxGender.Location = new System.Drawing.Point(89, 84);
+            this.comboBoxGender.Location = new System.Drawing.Point(72, 35);
             this.comboBoxGender.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxGender.Name = "comboBoxGender";
             this.comboBoxGender.Size = new System.Drawing.Size(117, 21);
@@ -324,7 +338,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 65);
+            this.label3.Location = new System.Drawing.Point(23, 13);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(47, 13);
@@ -333,16 +347,16 @@
             // 
             // textBoxFullText
             // 
-            this.textBoxFullText.Location = new System.Drawing.Point(89, 63);
+            this.textBoxFullText.Location = new System.Drawing.Point(72, 11);
             this.textBoxFullText.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxFullText.Name = "textBoxFullText";
-            this.textBoxFullText.Size = new System.Drawing.Size(160, 20);
+            this.textBoxFullText.Size = new System.Drawing.Size(274, 20);
             this.textBoxFullText.TabIndex = 5;
             // 
             // comboBoxAgeGroup
             // 
             this.comboBoxAgeGroup.FormattingEnabled = true;
-            this.comboBoxAgeGroup.Location = new System.Drawing.Point(89, 41);
+            this.comboBoxAgeGroup.Location = new System.Drawing.Point(72, 85);
             this.comboBoxAgeGroup.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxAgeGroup.Name = "comboBoxAgeGroup";
             this.comboBoxAgeGroup.Size = new System.Drawing.Size(117, 21);
@@ -351,7 +365,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 43);
+            this.label2.Location = new System.Drawing.Point(10, 87);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(58, 13);
@@ -361,7 +375,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 21);
+            this.label1.Location = new System.Drawing.Point(35, 62);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
@@ -371,25 +385,11 @@
             // comboBoxColor
             // 
             this.comboBoxColor.FormattingEnabled = true;
-            this.comboBoxColor.Location = new System.Drawing.Point(89, 19);
+            this.comboBoxColor.Location = new System.Drawing.Point(72, 60);
             this.comboBoxColor.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxColor.Name = "comboBoxColor";
             this.comboBoxColor.Size = new System.Drawing.Size(117, 21);
             this.comboBoxColor.TabIndex = 1;
-            // 
-            // ColumnOrderNumber
-            // 
-            this.ColumnOrderNumber.DataPropertyName = "OrderNumber";
-            this.ColumnOrderNumber.HeaderText = "OrderNumber";
-            this.ColumnOrderNumber.Name = "ColumnOrderNumber";
-            this.ColumnOrderNumber.ReadOnly = true;
-            // 
-            // ColumnType
-            // 
-            this.ColumnType.DataPropertyName = "Type";
-            this.ColumnType.HeaderText = "Type";
-            this.ColumnType.Name = "ColumnType";
-            this.ColumnType.ReadOnly = true;
             // 
             // Form1
             // 

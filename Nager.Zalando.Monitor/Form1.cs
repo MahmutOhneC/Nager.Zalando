@@ -1,5 +1,7 @@
 ﻿using Nager.Zalando.Model;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -17,9 +19,9 @@ namespace Nager.Zalando.Monitor
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridViewImages.AutoGenerateColumns = false;
 
-            this.comboBoxColor.DataSource = Enum.GetValues(typeof(Color));
-            this.comboBoxAgeGroup.DataSource = Enum.GetValues(typeof(AgeGroup));
-            this.comboBoxGender.DataSource = Enum.GetValues(typeof(Gender));
+            this.comboBoxColor.DataSource = (new object[] { DBNull.Value }.Concat(Enum.GetValues(typeof(Color)).Cast<object>())).ToList();
+            this.comboBoxAgeGroup.DataSource = (new object[] { DBNull.Value }.Concat(Enum.GetValues(typeof(AgeGroup)).Cast<object>())).ToList();
+            this.comboBoxGender.DataSource = (new object[] { DBNull.Value }.Concat(Enum.GetValues(typeof(Gender)).Cast<object>())).ToList();
 
             this.pictureBoxProduct.InitialImage = ImageHelper.GetImage("loading...");
             this.pictureBoxLogo.InitialImage = ImageHelper.GetImage("loading...");
@@ -36,10 +38,10 @@ namespace Nager.Zalando.Monitor
 
                 var filter = new ArticleFilter();
                 //filter.AgeGroup = AgeGroup.Kids | AgeGroup.Babies;
-                filter.AgeGroup = (AgeGroup)this.comboBoxAgeGroup.SelectedItem;
-                filter.Color = (Color)this.comboBoxColor.SelectedItem;
+                filter.AgeGroup = this.comboBoxAgeGroup.SelectedItem as AgeGroup?;
+                filter.Color = this.comboBoxColor.SelectedItem as Color?;
                 filter.FullText = this.textBoxFullText.Text;
-                filter.Gender = (Gender)this.comboBoxGender.SelectedItem;
+                filter.Gender = this.comboBoxGender.SelectedItem as Gender?;
 
                 var task = await zalandoWrapper.GetArticles(filter);
 
